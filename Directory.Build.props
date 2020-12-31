@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+    <VersionPrefix>1.4.0</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
+    <PackageId>DynamicVNET</PackageId>
+    <Version>1.4.0</Version>
+    <Authors>Rasul Huseynov</Authors>
+    <Description>DynamicVNET is .NET Standard library that was created help to develop reuse dynamic validation. It helps to build some rules on POCO and own blackbox libs. It has rich conveniences and features as a Fluent API in runtime, wrapped over DataAnnotation attributes and supports a cross-platform environment.</Description>
+    <Company>DynamicVNET.Lib</Company>
+    <Copyright>Copyright (c) 2018-2021 Rasul Huseynov</Copyright>
+    <PackageLicenseUrl>https://github.com/rasulhsn/DynamicVNET/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/rasulhsn/DynamicVNET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/rasulhsn/DynamicVNET</RepositoryUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <PackageOutputPath>$(MSBuildProjectDirectory)/../../.build/packages</PackageOutputPath>
+  </PropertyGroup>
+</Project>
