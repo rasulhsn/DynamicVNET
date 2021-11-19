@@ -1,7 +1,7 @@
 ## DynamicVNET - Overview
 [![NuGet](https://img.shields.io/badge/nuget-1.4.0.beta-blue.svg)](https://www.nuget.org/packages/DynamicVNET/1.4.0-beta)
 
-DynamicVNET is .NET Standard library that was created help to develop reuse dynamic validation. It helps to build some rules on POCO and own blackbox libs. It has rich conveniences and features as a <strong>Fluent API</strong> in runtime, wrapped over <strong>DataAnnotation</strong> attributes and supports a cross-platform environment.
+DynamicVNET is .NET Standard library that was created help to develop reuse dynamic validation. It helps to build some rules on POCO and own blackbox libs. It has rich conveniences and features as a <strong>Fluent API</strong> in runtime, wrapped over <strong>DataAnnotation</strong> attributes and supports a cross-platform environments.
 
 
 ### Support
