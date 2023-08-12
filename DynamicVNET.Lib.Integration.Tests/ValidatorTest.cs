@@ -2,17 +2,21 @@
 
 namespace DynamicVNET.Lib.Integration.Tests
 {
-    public class ValidatorBuilderTests
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ValidatorTest
     {
         [Fact]
-        public void IsValid()
+        public void IsValid_GivenInvalidObject_ReturnsFalse()
         {
             // Act
-            ValidatorBuilder<UserStub> builder = new ValidatorBuilder<UserStub>();
-            builder.Marker
+            var validator = ValidatorFactory.Create<UserStub>(builder =>
+            {
+                builder
                     .Required(x => x.Name)
                     .Required(x => x.Surname);
-            var validator = builder.Build();
+            });
 
             // Arrange
             bool isValid = validator.IsValid(new UserStub());

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace DynamicVNET.Lib.Internal
 {
+    /// <summary>
+    /// Implemented for escaping concurrency loop problem.
+    /// </summary>
     internal class RuleCollection : IEnumerable<IValidationRule>, ICollection<IValidationRule>
     {
         private ICollection<IValidationRule> _markers;

@@ -5,7 +5,7 @@ using DynamicVNET.Lib.Internal;
 
 namespace DynamicVNET.Lib
 {
-    public static class DefaultRuleExtensions
+    public static class RuleExtensions
     {
         // For regular expressions.
         public const string URL_PATTERN = @"(mailto\:|(news|(ht|f)tp(s?))\://)(([^[:space:]]+)|([^[:space:]]+)( #([^#]+)#)?)";
@@ -17,95 +17,111 @@ namespace DynamicVNET.Lib
         public const string ERROR_NOT_NULL = "Member is null, validation invalid!";
         public const string ERROR_CUSTOM = "Custom condition fail, validation invalid!";
 
-        public static BaseRuleMarker Null(this BaseRuleMarker builder, IMember member, string errorMessage)
+        public static IRuleMarker Null(this IRuleMarker builder, IMember member, string errorMessage)
         {
             if (!member.IsNullable)
-                throw new ValidationMarkerException(nameof(Null), $"This method can not be apply to {member.Type.ToString()} type!");
+            {
+                throw new ValidationMarkerException(nameof(Null), $"This method can not be apply to {member.Type.ToString()}!");
+            }
 
             var context = new RuleContext(nameof(Null), member);
             builder.Add(new UniquePredicateRule<object>(new PredicateRule<object>(instance =>
             {
                 if (member.ResolveValue(instance) == null)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
+
             }, errorMessage, context), context));
             return builder;
         }
 
-        public static BaseRuleMarker NotNull(this BaseRuleMarker builder, IMember member, string errorMessage)
+        public static IRuleMarker NotNull(this IRuleMarker builder, IMember member, string errorMessage)
         {
+            if (!member.IsNullable)
+            {
+                throw new ValidationMarkerException(nameof(NotNull), $"This method can not be apply to {member.Type.ToString()} type!");
+            }
+
             var context = new RuleContext(nameof(NotNull), member);
             builder.Add(new UniquePredicateRule<object>(new PredicateRule<object>(instance =>
             {
                 if (member.ResolveValue(instance) != null)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
             }, errorMessage, context), context));
             return builder;
         }
 
-        public static BaseRuleMarker StringLen(this BaseRuleMarker builder, IMember member, int max)
+        public static IRuleMarker StringLen(this IRuleMarker builder, IMember member, int max)
         {
-            builder.Add(new DataAnnotationRuleAdapter(new StringLengthAttribute(max),
+            builder.Add(new AnnotationRuleAdapter(new StringLengthAttribute(max),
                                                             new RuleContext(nameof(StringLen), member)));
             return builder;
         }
 
-        public static BaseRuleMarker RegularExp(this BaseRuleMarker builder, IMember member, string operationName ,string pattern)
+        public static IRuleMarker RegularExp(this IRuleMarker builder, IMember member, string operationName ,string pattern)
         {
-            builder.Add(new DataAnnotationRuleAdapter(new RegularExpressionAttribute(pattern),
+            builder.Add(new AnnotationRuleAdapter(new RegularExpressionAttribute(pattern),
                                                             new RuleContext(operationName, member)));
             return builder;
         }
 
-        public static BaseRuleMarker MaxLen(this BaseRuleMarker builder, IMember member, int length)
+        public static IRuleMarker MaxLen(this IRuleMarker builder, IMember member, int length)
         {
-            builder.Add(new DataAnnotationRuleAdapter(new MaxLengthAttribute(length),
+            builder.Add(new AnnotationRuleAdapter(new MaxLengthAttribute(length),
                                                           new RuleContext(nameof(MaxLen), member)));
             return builder;
         }
 
-        public static BaseRuleMarker Required(this BaseRuleMarker builder, IMember member)
+        public static IRuleMarker Required(this IRuleMarker builder, IMember member)
         {
-            builder.Add(new DataAnnotationRuleAdapter(new RequiredAttribute(),
+            builder.Add(new AnnotationRuleAdapter(new RequiredAttribute(),
                                                             new RuleContext(nameof(Required), member)));
             return builder;
         }
 
-        public static BaseRuleMarker Range(this BaseRuleMarker builder, IMember member, int min, int max)
+        public static IRuleMarker Range(this IRuleMarker builder, IMember member, int min, int max)
         {
-            builder.Add(new DataAnnotationRuleAdapter(new RangeAttribute(min, max),
+            builder.Add(new AnnotationRuleAdapter(new RangeAttribute(min, max),
                                                             new RuleContext(nameof(Range), member)));
             return builder;
         }
 
-        public static BaseRuleMarker Range(this BaseRuleMarker builder, IMember member, double min, double max)
+        public static IRuleMarker Range(this IRuleMarker builder, IMember member, double min, double max)
         {
-            builder.Add(new DataAnnotationRuleAdapter(new RangeAttribute(min, max),
+            builder.Add(new AnnotationRuleAdapter(new RangeAttribute(min, max),
                                                             new RuleContext(nameof(Range), member)));
             return builder;
         }
 
-        public static BaseRuleMarker Range(this BaseRuleMarker builder, IMember member, Type type, string min, string max)
+        public static IRuleMarker Range(this IRuleMarker builder, IMember member, Type type, string min, string max)
         {
-            builder.Add(new DataAnnotationRuleAdapter(new RangeAttribute(type, min, max),
+            builder.Add(new AnnotationRuleAdapter(new RangeAttribute(type, min, max),
                                                             new RuleContext(nameof(Range), member)));
             return builder;
         }
 
-        public static BaseRuleMarker EmailAddress(this BaseRuleMarker builder, IMember member)
+        public static IRuleMarker EmailAddress(this IRuleMarker builder, IMember member)
         {
             return builder.RegularExp(member, nameof(EmailAddress) ,EMAIL_PATTERN);
         }
 
-        public static BaseRuleMarker PhoneNumber(this BaseRuleMarker builder, IMember member)
+        public static IRuleMarker PhoneNumber(this IRuleMarker builder, IMember member)
         {
             return builder.RegularExp(member, nameof(PhoneNumber), PHONE_PATTERN);
         }
 
-        public static BaseRuleMarker Url(this BaseRuleMarker builder, IMember member)
+        public static IRuleMarker Url(this IRuleMarker builder, IMember member)
         {
             return builder.RegularExp(member, nameof(Url), URL_PATTERN);
         }

@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq.Expressions;
 
 namespace DynamicVNET.Lib.Internal
 {
     /// <summary>
-    /// Factory for pooling <see cref="ExpressionMember"/>. Safely implemented with synchronization context.
+    /// Pooling factory for <see cref="ExpressionMember"/>.
+    /// Safely implemented through the ConcurrencyCollections.
     /// </summary>
     public static class ExpressionMemberFactory
     {
-        private static object _LOCK_OBJ = new object();
-        private static IDictionary<int, ExpressionMember> _membersPool { get; }
+        private static ConcurrentDictionary<int, ExpressionMember> _pool;
 
         /// <summary>
-        /// Initializes the <see cref="ExpressionMemberFactory"/> class.
+        /// Static initializer the <see cref="ExpressionMemberFactory"/> class.
         /// </summary>
         static ExpressionMemberFactory()
         {
-            _membersPool = new Dictionary<int, ExpressionMember>();
+            _pool = new ConcurrentDictionary<int, ExpressionMember>();
         }
 
         /// <summary>
@@ -35,48 +35,36 @@ namespace DynamicVNET.Lib.Internal
         /// <summary>
         /// Creates the specified expression.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="TMember">The type of the member.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <param name="inPool">if set to <c>true</c> [in pool].</param>
         /// <returns> <see cref="ExpressionMember"/></returns>
         /// <exception cref="ArgumentNullException">expression</exception>
-        public static ExpressionMember Create<T, TMember>(Expression<Func<T, TMember>> expression, bool inPool = true)
+        public static ExpressionMember Create<T, TMember>(Expression<Func<T, TMember>> expression)
         {
-            if (expression == null)
-                throw new ArgumentNullException(nameof(expression));
-
-            ExpressionMember createExpMember() => new ExpressionMember(expression, typeof(T), typeof(TMember));
-
-            if (inPool)
+            int CreateHashCode(Type type, Expression expInstance)
             {
-                lock (_LOCK_OBJ)
-                {
-                    int expHashCode = CreateHashCode(typeof(T), expression);
+                string expStr = expInstance.ToString();
+                string nameStr = type.FullName.ToString();
+                return $"{expStr}{nameStr}".GetHashCode();
+            }
 
-                    if (_membersPool.TryGetValue(expHashCode, out ExpressionMember member))
-                    {
-                        return member;
-                    }
-                    else
-                    {
-                        var newMember = createExpMember();
-                        _membersPool.Add(expHashCode, newMember);
-                        return newMember;
-                    }
-                }
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            int memberHashCode = CreateHashCode(typeof(T), expression);
+
+            if (_pool.TryGetValue(memberHashCode, out ExpressionMember member))
+            {
+                return member;
             }
             else
             {
-                return createExpMember();
+                var newMember = new ExpressionMember(expression, typeof(T), typeof(TMember));
+                _pool.TryAdd(memberHashCode, newMember);
+                return newMember;
             }
-        }
-
-        private static int CreateHashCode(Type type, Expression expression)
-        {
-            string expStr = expression.ToString();
-            string nameStr = type.FullName.ToString();
-            return $"{expStr}{nameStr}".GetHashCode();
         }
     }
 }

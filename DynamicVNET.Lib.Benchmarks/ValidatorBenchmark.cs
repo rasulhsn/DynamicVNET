@@ -6,24 +6,24 @@ namespace DynamicVNET.Lib.Benchmarks
     [MemoryDiagnoser]
     public class ValidatorBenchmark
     {
-        private IValidator _validator;
-        private IValidator _failFastValidator;
+        private (IValidator Validator, Sample Instance) _validator;
+        private (IValidator Validator, Sample Instance) _failFastValidator;
 
         [GlobalSetup]
         public void GlobalSetup()
         {
-            _validator = SampleSetup.WithNoErrors;
-            _failFastValidator = SampleSetup.WithErrors;
+            _validator = SampleSetup.CreateNonErrorType();
+            _failFastValidator = SampleSetup.CreateErrorType();
         }
 
         [Benchmark]
         public object FailValidate()
         {
-            var model = SampleSetup.ErrorModel;
+            var model = _failFastValidator.Instance;
 
             object vResult = null;
 
-            vResult = _failFastValidator.Validate(model);
+            vResult = _failFastValidator.Validator.Validate(model);
 
             return vResult;
         }
@@ -31,11 +31,11 @@ namespace DynamicVNET.Lib.Benchmarks
         [Benchmark]
         public object Validate()
         {
-            var model = SampleSetup.NoErrorModel;
+            var model = _validator.Instance;
 
             var vResult = new object();
 
-            vResult = _validator.Validate(model);
+            vResult = _validator.Validator.Validate(model);
 
             return vResult;
         }
@@ -43,11 +43,11 @@ namespace DynamicVNET.Lib.Benchmarks
         [Benchmark]
         public object FailIsValid()
         {
-            var model = SampleSetup.ErrorModel;
+            var model = _failFastValidator.Instance;
 
             object vResult = null;
 
-            vResult = _failFastValidator.IsValid(model);
+            vResult = _failFastValidator.Validator.IsValid(model);
 
             return vResult;
         }
@@ -55,11 +55,11 @@ namespace DynamicVNET.Lib.Benchmarks
         [Benchmark]
         public object IsValid()
         {
-            var model = SampleSetup.NoErrorModel;
+            var model = _validator.Instance;
 
             var vResult = new object();
 
-            vResult = _validator.IsValid(model);
+            vResult = _validator.Validator.IsValid(model);
 
             return vResult;
         }

@@ -1,9 +1,7 @@
-﻿namespace DynamicVNET.Lib.Integration.Tests
+﻿namespace DynamicVNET.Lib.Integration.Tests.Helper
 {
-    public class UserStubStrongValidator : BaseValidator<UserStub>
+    public class ModelValidator : BaseValidator<UserStub>
     {
-        public override bool FailFirst => true;
-
         protected override void Configure(ITypeRuleMarker<UserStub> builder)
         {
             builder

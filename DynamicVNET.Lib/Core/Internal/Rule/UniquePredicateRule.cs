@@ -16,12 +16,10 @@ namespace DynamicVNET.Lib.Internal
             _predicate = predicateRule;
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="instance"></param>
-        public override void Apply(object instance)
+        /// <inheritdoc/>
+        public override ValidationRuleResult Validate(object instance)
         {
-            this._predicate.Apply(instance);
+            return this._predicate.Validate(instance);
         }
     }
 }

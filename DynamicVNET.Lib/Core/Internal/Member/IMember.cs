@@ -5,36 +5,24 @@ namespace DynamicVNET.Lib.Internal
     public interface IMember
     {
         /// <summary>
-        /// Gets the type.
+        /// Gets the member type.
         /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
         Type Type { get; }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is nullable.
+        /// Gets a value indicating whether member is nullable.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is nullable; otherwise, <c>false</c>.
-        /// </value>
         bool IsNullable { get; }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is field or property.
+        /// Gets a value indicating whether member is field or property.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is field or property; otherwise, <c>false</c>.
-        /// </value>
         bool IsFieldOrProperty { get; }
 
         /// <summary>
-        /// Gets the end name of the point.
+        /// Gets the end of the name for example name of marked property or field.
         /// </summary>
-        /// <value>
-        /// The end name of the point.
-        /// </value>
-        string EndPointName { get; }
+        string Name { get; }
 
         /// <summary>
         /// Resolves the member value.

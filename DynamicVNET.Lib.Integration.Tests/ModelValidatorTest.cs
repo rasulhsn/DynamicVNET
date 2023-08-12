@@ -1,9 +1,10 @@
 using System.Linq;
+using DynamicVNET.Lib.Integration.Tests.Helper;
 using Xunit;
 
 namespace DynamicVNET.Lib.Integration.Tests
 {
-    public class CustomValidatorTest
+    public class ModelValidatorTest
     {
         [Fact]
         public void Example()
@@ -15,14 +16,13 @@ namespace DynamicVNET.Lib.Integration.Tests
                 Surname = "b",
                 Token = new TokenStub() { TokenNumber = "AAAAAAAAAAAAAAAAA" }
             };
-            var builder = new ModelValidatorBuilder();
-            var validator = builder.Build();
+            var validator = new ModelValidator();
 
             bool actual = validator.IsValid(model);
             var result = validator.Validate(model);
 
             Assert.False(actual);
-            Assert.True(result != null && result.Count() == 2);
+            Assert.True(result != null && result.Count() == 4);
         }
 
         [Fact]
@@ -35,8 +35,7 @@ namespace DynamicVNET.Lib.Integration.Tests
                 Surname = "b",
                 Token = new TokenStub() { TokenNumber = "resul@gmail" }
             };
-            var builder = new ModelValidatorBuilder();
-            var validator = builder.Build();
+            var validator = new ModelValidator();
 
             bool actual = validator.IsValid(model);
 
@@ -54,8 +53,7 @@ namespace DynamicVNET.Lib.Integration.Tests
                 Surname = "b",
                 Token = new TokenStub() { TokenNumber = "resul@gmail.com" }
             };
-            var builder = new ModelValidatorBuilder();
-            var validator = builder.Build();
+            var validator = new ModelValidator();
 
             bool actual = validator.IsValid(model);
 
@@ -66,11 +64,9 @@ namespace DynamicVNET.Lib.Integration.Tests
         public void Example4()
         {
             string value = "aaaa";
-            var builder = new StringValidatorBuilder();
-            var validator = builder.Build();
+            var validator = new StringValidator();
 
             bool actual = validator.IsValid(value);
-
 
             Assert.True(actual);
         }
@@ -86,8 +82,7 @@ namespace DynamicVNET.Lib.Integration.Tests
                 Surname = "b",
                 Token = new TokenStub() { TokenNumber = "resul@gmail.com" }
             };
-            var builder = new ModelValidatorBuilder();
-            var validator = builder.Build();
+            var validator = new ModelValidator();
 
             bool actual = validator.IsValid(model);
 
@@ -98,8 +93,7 @@ namespace DynamicVNET.Lib.Integration.Tests
         public void Example6()
         {
             string value = "HuseynovHuseynov";
-            var builder = new StringValidatorBuilder();
-            var validator = builder.Build();
+            var validator = new StringValidator();
 
             bool actual = validator.IsValid(value);
 
@@ -107,7 +101,7 @@ namespace DynamicVNET.Lib.Integration.Tests
         }
 
         [Fact]
-        public void Example8()
+        public void ExampleWithFailFast8()
         {
             UserStub model = new UserStub()
             {
@@ -118,11 +112,9 @@ namespace DynamicVNET.Lib.Integration.Tests
             };
             var validator = new UserStubStrongValidator();
 
-            bool actual = validator.IsValid(model);
             var result = validator.Validate(model);
 
-            Assert.False(actual);
-            Assert.True(result != null && result.Count() == 2);
+            Assert.True(result != null && result.Count() == 1);
         }
 
         [Fact]
