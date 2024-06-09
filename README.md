@@ -8,7 +8,7 @@ DynamicVNET is a .NET Standard library that was created to develop dynamic reuse
  - Branching & Nested Branching [synonim logical tree].
  - Nested Members.
  - Value Types & Single Primitive & Reference Types (class)
- - Ignoring of repeated validation.
+ - Auto Ignore (Ignoring of repeated validation).
  - Strongly Typed Validator via Inheritance.
 
 ### Where is using ?
@@ -59,7 +59,7 @@ var validator = ValidatorFacade.Create<Employee>(builder => {
                             .EmailAddress(x => x.Email)
                             .Predicate(x => x.Email.Contains("@simple.com"))
                             .Required(x => x.TokenNumber.Number) //  nested member
-                            .Required(x => x.TokenNumber.Number); // automatic ignored
+                            .Required(x => x.TokenNumber.Number); // auto ignore
                 });        
 
 bool result = validator.IsValid(emp);
