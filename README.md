@@ -7,14 +7,13 @@ DynamicVNET is a .NET Standard library that was created to develop dynamic reuse
 ### Support
  - Branching & Nested Branching [synonim logical tree].
  - Nested Members.
- - Value Types & Single Primitive.
- - Reference Types (class).
- - Automatic ignoring of repeated validation.
- - Strongly Self Validator via Inheritance.
+ - Value Types & Single Primitive & Reference Types (class)
+ - Ignoring of repeated validation.
+ - Strongly Typed Validator via Inheritance.
 
 ### Where is using ?
- - POCO Validation.
- - Dynamic validation for private libraries (third party libraries 'dll').
+ - POCO validation.
+ - Dynamic validation for private libraries (third party libraries).
 
 ### Validation methods
    - Predicate (Custom)
@@ -122,9 +121,9 @@ public class EmployeeValidator : BaseValidator<Employee>
  
  Employee emp = new Employee()
 {
-    Name = "selman:okkes", 
-    TokenNumber = new Token() { Number = "adasd123123asd" }, 
-    Email = "jhon.sim@jhona.com"
+    Name = "rasul:huseynov", 
+    TokenNumber = new Token() { Number = "1111111123123ASD" }, 
+    Email = "jhon.1990@gmail.com"
 };
  
  
