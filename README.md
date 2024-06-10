@@ -90,7 +90,7 @@ IEnumerable<ValidationMarkerResult> results = validator.Validate(emp);
  });
 ```
 
-## Example Strongly Self Validator
+## Example Strongly Typed Validator
 
 ```csharp
 public class EmployeeValidator : BaseValidator<Employee>
