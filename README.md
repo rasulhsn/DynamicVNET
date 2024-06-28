@@ -1,19 +1,20 @@
 ## DynamicVNET - Overview
-[![NuGet](https://img.shields.io/badge/nuget-1.4.0.beta-blue.svg)](https://www.nuget.org/packages/DynamicVNET/1.4.0-beta)
+[![NuGet](https://img.shields.io/badge/nuget-1.4.0-blue.svg)](https://www.nuget.org/packages/DynamicVNET/1.4.0)
 
-DynamicVNET is a .NET Standard library that was created to develop dynamic reuse validation. The main idea of the library is to apply validation rules using a declarative approach. And the rules can be used on POCO and BlackBox libraries. Also, it has rich facilities and features as Fluent API at runtime.
+DynamicVNET is .NET Standard library that was created help to develop reuse dynamic validation. It helps to build some rules on POCO and own blackbox libs. It has rich conveniences and features as a <strong>Fluent API</strong> in runtime, wrapped over <strong>DataAnnotation</strong> attributes and supports a cross-platform environment.
 
 
 ### Support
- - Branching & Nested Branching [synonim logical tree].
+ - Branching & Nested Branching.
  - Nested Members.
- - Value Types & Single Primitive & Reference Types (class)
- - Auto Ignore (Ignoring of repeated validation).
- - Strongly Typed Validator via Inheritance.
+ - Value Types & Single Primitive.
+ - Reference Types (class).
+ - Automatic ignoring of repeated validation.
+ - Strongly Self Validator via Inheritance.
 
 ### Where is using ?
- - POCO validation.
- - Dynamic validation for private libraries (third party libraries).
+ - POCO Validation.
+ - Dynamic validation for private libraries (third party libraries 'dll').
 
 ### Validation methods
    - Predicate (Custom)
@@ -38,7 +39,6 @@ public class Employee
    public string Email { get; set; }
    
 }
-
 public class Token
 {
    public string Number { get; set; }
@@ -53,25 +53,25 @@ Employee emp = new Employee()
     Email = "jhon.sim@gmail.com"
 };
 
-var validator = ValidatorFacade.Create<Employee>(builder => {
+var validator = ValidatorFactory.Create<Employee>(builder => {
                     builder.Marker
                             .StringLen(x => x.Name, 4)
                             .EmailAddress(x => x.Email)
                             .Predicate(x => x.Email.Contains("@simple.com"))
                             .Required(x => x.TokenNumber.Number) //  nested member
-                            .Required(x => x.TokenNumber.Number); // auto ignore
+                            .Required(x => x.TokenNumber.Number); // automatic ignored
                 });        
 
 bool result = validator.IsValid(emp);
 ``` 
-Detailed Result.
-```csharp
 
+```csharp
+// Detailed Result
 IEnumerable<ValidationMarkerResult> results = validator.Validate(emp);
 ```
 #### Branch Example
 ```csharp
- var validator = ValidatorFacade.Create<Model>(builder => {
+ var validator = ValidatorFactory.Create<Model>(builder => {
     builder.Marker
             .Required(x => x.Token.TokenNumber)
             .Branch(x => x.Name.Contains("resul"), x =>
@@ -90,40 +90,36 @@ IEnumerable<ValidationMarkerResult> results = validator.Validate(emp);
  });
 ```
 
-## Example Strongly Typed Validator
+## Example Strongly Self Validator
 
 ```csharp
 public class EmployeeValidator : BaseValidator<Employee>
 {
-        public EmployeeValidator()
-        {
-            Setup(builder =>
-            {
-                builder.Marker
-                       .For(x => x.Name)
-                       .Required();
+      protected override void Setup(ValidatorBuilder<Employee> builder)
+      {
+           builder.Marker
+                     .For(x => x.Name)
+                     .Required();
 
-                builder.Marker
-                      .Branch(x => x.Name.Contains("jhon"), x =>
-                      {
-                        x.MaxLen(m => m.TokenNumber.Number, 15);
-                      })
-                      .For(x => x.Email)
-                      .Required()
-                      .EmailAddress();
+           builder.Marker
+                   .Branch(x => x.Name.Contains("jhon"), x =>
+                   {
+                      x.MaxLen(m => m.TokenNumber.Number, 15);
+                   })
+                    .For(x => x.Email)
+                    .Required()
+                    .EmailAddress();
 
-                builder.Marker
-                     .Required(x => x.TokenNumber.Number);
-            });
-            
-        }
+           builder.Marker
+                   .Required(x => x.TokenNumber.Number);
+      }
 }
  
- Employee emp = new Employee()
+Employee emp = new Employee()
 {
-    Name = "rasul:huseynov", 
-    TokenNumber = new Token() { Number = "1111111123123ASD" }, 
-    Email = "jhon.1990@gmail.com"
+    Name = "selman:okkes", 
+    TokenNumber = new Token() { Number = "adasd123123asd" }, 
+    Email = "jhon.sim@jhona.com"
 };
  
  
@@ -136,7 +132,7 @@ public class EmployeeValidator : BaseValidator<Employee>
 Install [DynamicVNET](https://www.nuget.org/packages/DynamicVNET/) from the package manager console:
 
 ```
-PM> Install-Package DynamicVNET -Version 1.4.0-beta
+PM> Install-Package DynamicVNET -Version 1.4.0
 ```
 
 ### License & Copyright

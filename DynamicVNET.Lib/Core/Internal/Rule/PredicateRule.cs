@@ -38,19 +38,20 @@ namespace DynamicVNET.Lib.Internal
             this.Context = context;
         }
 
-        /// <summary>
-        /// Applies the specified instance.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        /// <exception cref="ValidationMarkerException">T - Occurred exception in PredicateRule<T>. Please check detail error information [InnerErorr]!</exception>
-        public virtual void Apply(object instance)
+        /// <inheritdoc/>
+        public virtual ValidationRuleResult Validate(object instance)
         {
             try
             {
                 if (!Invoke(instance))
-                    Context.SetResult(ErrorMessage);
-                else
-                    Context.SetResult();
+                {
+                    return ValidationRuleResult.Failure(this.Context.Member.Name,
+                                                        this.Context.OperationName,
+                                                        this.ErrorMessage);
+                }
+
+                return ValidationRuleResult.Success(this.Context.Member.Name,
+                                                    this.Context.OperationName);
             }
             catch (Exception ex)
             {

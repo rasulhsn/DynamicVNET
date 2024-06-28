@@ -2,27 +2,30 @@
 
 namespace DynamicVNET.Lib.Internal
 {
-    /// <seealso cref="DynamicVNET.Lib.Internal.IMember" />
+    /// <seealso cref="IMember" />
     public class EmptyMember : IMember
     {
+        ///<inheritdoc cref="IMember.Type"/>
         public Type Type { get; }
 
+        ///<inheritdoc cref="IMember.IsNullable"/>
         public bool IsNullable { get; }
 
+        ///<inheritdoc cref="IMember.IsFieldOrProperty"/>
         public bool IsFieldOrProperty { get; }
 
-        public string EndPointName { get; }
+        ///<inheritdoc cref="IMember.Name"/>
+        public string Name { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmptyMember"/> class.
         /// </summary>
-        /// <param name="endPointName">End name of the point.</param>
-        /// <param name="type">The type.</param>
-        /// <param name="isNullable">if set to <c>true</c> [is nullable].</param>
-        /// <param name="isFieldOrProperty">if set to <c>true</c> [is field or property].</param>
-        public EmptyMember(string endPointName, Type type, bool isNullable = true, bool isFieldOrProperty = false)
+        public EmptyMember(string name,
+                            Type type,
+                            bool isNullable = true,
+                            bool isFieldOrProperty = false)
         {
-            this.EndPointName = endPointName;
+            this.Name = name;
             this.Type = type;
             this.IsNullable = isNullable;
             this.IsFieldOrProperty = isFieldOrProperty;

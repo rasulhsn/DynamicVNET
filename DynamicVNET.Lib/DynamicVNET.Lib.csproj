@@ -1,11 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461;net5.0</TargetFrameworks>
     <PackageId>DynamicVNET</PackageId>
-    <Version>1.4.0-beta</Version>
+    <Version>1.4.0</Version>
+    <VersionPrefix>1.4.0</VersionPrefix>
     <Authors>Rasul Huseynov</Authors>
-    <Description>The library created for the use validations like pure POCO objects , private Libraries. Also library creates dynamic validation via Fluent API in the runtime.</Description>
+    <Description>
+      DynamicVNET is .NET Standard library that was created help to develop reuse dynamic validation. It helps to build some rules on POCO and own blackbox libs. It has rich conveniences and features as a Fluent API in runtime, wrapped over DataAnnotation attributes and supports a cross-platform environment.
+    </Description>
     <Company>DynamicVNET.Lib</Company>
     <Copyright>Copyright (c) 2018-2021 Rasul Huseynov</Copyright>
     <PackageLicenseUrl>https://github.com/rasulhsn/DynamicVNET/blob/master/LICENSE</PackageLicenseUrl>
@@ -20,11 +23,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\CommonAssemblyInfo.cs" Link="CommonAssemblyInfo.cs" />
   </ItemGroup>
 
 </Project>

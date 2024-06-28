@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
-using DynamicVNET.Lib.Internal;
 
 namespace DynamicVNET.Lib
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IValidator
     {
         /// <summary>
@@ -22,22 +24,14 @@ namespace DynamicVNET.Lib
         IEnumerable<ValidationRuleResult> Validate(object instance);
     }
 
+    /// <inheritdoc/>
+    /// <typeparam name="T"></typeparam>
     public interface IValidator<T> : IValidator
     {
-        /// <summary>
-        /// Returns true if ... is valid.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified instance is valid; otherwise, <c>false</c>.
-        /// </returns>
+        /// <inheritdoc/>
         bool IsValid(T instance);
 
-        /// <summary>
-        /// Validate the specified instance.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         IEnumerable<ValidationRuleResult> Validate(T instance);
     }
 }

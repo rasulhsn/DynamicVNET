@@ -1,6 +1,6 @@
 ﻿namespace DynamicVNET.Lib.Internal
 {
-    public interface IValidationRule
+    public interface IValidationRule : IValidation
     {
         /// <summary>
         /// Gets the context.
@@ -9,11 +9,5 @@
         /// The context.
         /// </value>
         RuleContext Context { get; }
-
-        /// <summary>
-        /// Applies the specified instance.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        void Apply(object instance);
     }
 }

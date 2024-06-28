@@ -5,6 +5,7 @@ namespace DynamicVNET.Lib.Unit.Tests
     public class UserStub
     {
         public int Age { get; set; }
+
         public string Name { get; set; }
 
         public string Surname { get; set; }

@@ -19,9 +19,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="..\CommonAssemblyInfo.cs" Link="CommonAssemblyInfo.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DynamicVNET.Lib\DynamicVNET.Lib.csproj" />

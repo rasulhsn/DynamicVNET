@@ -4,27 +4,20 @@ namespace DynamicVNET.Lib.Benchmarks.Helper
 {
     public static class SampleSetup
     {
-        private static IValidator CreateValidator(bool generateValid = true)
+        public static (IValidator Validator, Sample Instance) CreateErrorType()
         {
-            var tokenFaker = new Faker<SampleToken>()
-                    .RuleFor(x => x.TokenNumber, m => m.Random.Guid().ToString());
+            var sampleToken = CreateSampleToken();
 
-            SampleToken tokenSample = tokenFaker.Generate();
-            tokenSample.InnerToken = tokenFaker.Generate();
-            tokenSample.InnerToken.InnerToken = tokenFaker.Generate();
-
-            if (!generateValid)
-            {
-                var errorModelFaker = new Faker<Sample>()
+            var errorModelFaker = new Faker<Sample>()
                      .RuleFor(m => m.Age, m => m.Random.Int(0, 5))
                      .RuleFor(m => m.Name, m => m.Lorem.Word());
 
-                ErrorModel = errorModelFaker.Generate();
-                ErrorModel.Token = tokenSample;
+            var ErrorModel = errorModelFaker.Generate();
+            ErrorModel.Token = sampleToken;
 
-                var builder = new ValidatorBuilder<Sample>();
+            var validator = ValidatorFactory.Create<Sample>(builder =>
+            {
                 builder
-                    .Marker
                     .Range(x => x.Age, 10, 30)
                     .Required(x => x.Name)
                     .Required(x => x.Surname)
@@ -39,22 +32,26 @@ namespace DynamicVNET.Lib.Benchmarks.Helper
                     .Null(x => x.Token.TokenNumber)
                     .Null(x => x.Token.InnerToken.TokenNumber)
                     .Null(x => x.Token.InnerToken.InnerToken.TokenNumber);
+            }, failFirst: true);
 
-                return builder.Build();
-            }
-            else
-            {
-                var modelFaker = new Faker<Sample>()
+            return (validator, ErrorModel);
+        }
+
+        public static (IValidator Validator, Sample Instance) CreateNonErrorType()
+        {
+            var sampleToken = CreateSampleToken();
+
+            var modelFaker = new Faker<Sample>()
                      .RuleFor(m => m.Age, m => m.Random.Int(10, 30))
                      .RuleFor(m => m.Name, m => m.Lorem.Word())
                      .RuleFor(m => m.Surname, m => "fakeSample");
 
-                NoErrorModel = modelFaker.Generate();
-                NoErrorModel.Token = tokenSample;
+            var NoErrorModel = modelFaker.Generate();
+            NoErrorModel.Token = sampleToken;
 
-                var builder = new ValidatorBuilder<Sample>();
+            var validator = ValidatorFactory.Create<Sample>(builder =>
+            {
                 builder
-                    .Marker
                     .Range(x => x.Age, 10, 30)
                     .Required(x => x.Name)
                     .Required(x => x.Surname)
@@ -69,15 +66,21 @@ namespace DynamicVNET.Lib.Benchmarks.Helper
                     .NotNull(x => x.Token.TokenNumber)
                     .NotNull(x => x.Token.InnerToken.TokenNumber)
                     .NotNull(x => x.Token.InnerToken.InnerToken.TokenNumber);
+            });
 
-                return builder.Build();
-            }
+            return (validator, NoErrorModel);
         }
 
-        public static Sample ErrorModel { get; private set; }
-        public static Sample NoErrorModel { get; private set; }
+        private static SampleToken CreateSampleToken()
+        {
+            var tokenFaker = new Faker<SampleToken>()
+                    .RuleFor(x => x.TokenNumber, m => m.Random.Guid().ToString());
 
-        public static IValidator WithNoErrors => CreateValidator();
-        public static IValidator WithErrors => CreateValidator(false);
+            SampleToken tokenSample = tokenFaker.Generate();
+            tokenSample.InnerToken = tokenFaker.Generate();
+            tokenSample.InnerToken.InnerToken = tokenFaker.Generate();
+
+            return tokenSample;
+        }
     }
 }
