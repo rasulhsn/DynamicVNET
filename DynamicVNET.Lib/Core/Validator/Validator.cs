@@ -8,7 +8,7 @@ namespace DynamicVNET.Lib
 {
     public class Validator : IValidator
     {
-        private readonly IEnumerable<IValidationRule> _validationRules;
+        private readonly IEnumerable<IValidation> _validationRules;
 
         protected readonly ValidatorContext Context;
 
@@ -16,7 +16,7 @@ namespace DynamicVNET.Lib
         /// Initializes a new instance of the <see cref="Validator"/> class.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
-        internal Validator(IEnumerable<IValidationRule> validationRules, ValidatorContext context)
+        internal Validator(IEnumerable<IValidation> validationRules, ValidatorContext context)
         {
             this._validationRules = validationRules ?? throw new ArgumentNullException(nameof(validationRules));
             this.Context = context ?? throw new ArgumentNullException(nameof(ValidatorContext));
@@ -48,7 +48,7 @@ namespace DynamicVNET.Lib
         /// <summary>
         /// Initializes a new instance of the <see cref="Validator{T}"/> class.
         /// </summary>
-        public Validator(IEnumerable<IValidationRule> validationRules,
+        public Validator(IEnumerable<IValidation> validationRules,
                                             ValidatorContext context) : base(validationRules, context) { }
 
         /// <inheritdoc/>
