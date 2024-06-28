@@ -1,4 +1,4 @@
-﻿namespace DynamicVNET.Lib.Integration.Tests.Helper
+﻿namespace DynamicVNET.Lib.Integration.Tests.Stub
 {
     public class ModelValidator : BaseValidator<UserStub>
     {

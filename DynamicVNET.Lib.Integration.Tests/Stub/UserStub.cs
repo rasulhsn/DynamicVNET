@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DynamicVNET.Lib.Integration.Tests
+namespace DynamicVNET.Lib.Integration.Tests.Stub
 {
     public class UserStub
     {

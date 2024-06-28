@@ -4,6 +4,7 @@ using DynamicVNET.Lib.Internal;
 using System.Linq.Expressions;
 using System;
 using System.Linq;
+using DynamicVNET.Lib.Integration.Tests.Stub;
 
 namespace DynamicVNET.Lib.Integration.Tests
 {

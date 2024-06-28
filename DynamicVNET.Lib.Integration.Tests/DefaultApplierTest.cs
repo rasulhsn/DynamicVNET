@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DynamicVNET.Lib.Integration.Tests.Stub;
 using DynamicVNET.Lib.Internal;
 using Xunit;
 

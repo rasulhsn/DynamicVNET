@@ -1,4 +1,4 @@
-﻿namespace DynamicVNET.Lib.Integration.Tests
+﻿namespace DynamicVNET.Lib.Integration.Tests.Stub
 {
     public class StringValidator : BaseValidator<string>
     {

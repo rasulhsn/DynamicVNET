@@ -1,5 +1,5 @@
 using System.Linq;
-using DynamicVNET.Lib.Integration.Tests.Helper;
+using DynamicVNET.Lib.Integration.Tests.Stub;
 using Xunit;
 
 namespace DynamicVNET.Lib.Integration.Tests
