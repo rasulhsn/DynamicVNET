@@ -31,9 +31,9 @@ namespace DynamicVNET.Lib
         /// </summary>
         /// <param name="builder">The builder.</param>
         /// <param name="max">The maximum.</param>
-        public static IMemberRuleMarker StringLen(this IMemberRuleMarker builder, int max)
+        public static IMemberRuleMarker StringLen(this IMemberRuleMarker builder, int max, int? min = null)
         {
-            builder.StringLen(builder.Selected, max);
+            builder.StringLen(builder.Selected, max, min);
             return builder;
         }
 
@@ -131,18 +131,6 @@ namespace DynamicVNET.Lib
         {
             builder.Url(builder.Selected);
             return builder;
-        }
-
-
-        /// <summary>
-        /// Marker Phone number.
-        /// </summary>
-        /// <param name="builder">The builder.</param>
-        public static IMemberRuleMarker PhoneNumber(this IMemberRuleMarker builder)
-        {
-            builder.PhoneNumber(builder.Selected);
-            return builder;
-
         }
     }
 }

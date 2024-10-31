@@ -21,7 +21,6 @@ namespace DynamicVNET.Lib.Benchmarks.Helper
                     .Range(x => x.Age, 10, 30)
                     .Required(x => x.Name)
                     .Required(x => x.Surname)
-                    .PhoneNumber(x => x.Surname)
                     .Predicate(x =>
                     {
                         if (!string.IsNullOrEmpty(x.Surname) && x.Surname.Contains("fakeSample"))
@@ -55,7 +54,6 @@ namespace DynamicVNET.Lib.Benchmarks.Helper
                     .Range(x => x.Age, 10, 30)
                     .Required(x => x.Name)
                     .Required(x => x.Surname)
-                    .PhoneNumber(x => x.Surname)
                     .Predicate(x =>
                     {
                         if (!string.IsNullOrEmpty(x.Surname) && x.Surname.Contains("fakeSample"))

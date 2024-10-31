@@ -1,4 +1,5 @@
-﻿using DynamicVNET.Lib.Internal;
+﻿using DynamicVNET.Lib.Helper;
+using DynamicVNET.Lib.Internal;
 using System;
 using System.Linq.Expressions;
 
@@ -37,7 +38,7 @@ namespace DynamicVNET.Lib
         /// <param name="errorMessage">The error message.</param>
         public static ITypeRuleMarker<T> Null<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, string errorMessage = RuleExtensions.ERROR_NULL) where TMember : class
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.Null(expMember, errorMessage);
@@ -55,7 +56,7 @@ namespace DynamicVNET.Lib
         /// <param name="errorMessage">The error message.</param>
         public static ITypeRuleMarker<T> NotNull<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, string errorMessage = RuleExtensions.ERROR_NOT_NULL) where TMember : class
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.NotNull(expMember, errorMessage);
@@ -72,7 +73,7 @@ namespace DynamicVNET.Lib
         /// <param name="firstErrorMessage">The first error message.</param>
         public static ITypeRuleMarker<T> Predicate<T>(this ITypeRuleMarker<T> builder, Func<T, bool> condition, string firstErrorMessage = RuleExtensions.ERROR_CUSTOM)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create<T>();
                 builder.Add(new PredicateRule<T>(condition, firstErrorMessage, new RuleContext("Custom", expMember)));
@@ -88,12 +89,12 @@ namespace DynamicVNET.Lib
         /// <param name="builder">The builder.</param>
         /// <param name="member">The member.</param>
         /// <param name="max">The maximum.</param>
-        public static ITypeRuleMarker<T> StringLen<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, int max)
+        public static ITypeRuleMarker<T> StringLen<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, int max, int? min = null)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
-                builder.StringLen(expMember, max);
+                builder.StringLen(expMember, max, min);
             }, nameof(StringLen));
             return builder;
         }
@@ -107,28 +108,11 @@ namespace DynamicVNET.Lib
         /// <param name="member">The member.</param>
         public static ITypeRuleMarker<T> EmailAddress<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.RegularExp(expMember, nameof(EmailAddress), RuleExtensions.EMAIL_PATTERN);
             }, nameof(EmailAddress));
-            return builder;
-        }
-
-        /// <summary>
-        /// Marker Phone number.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="TMember">The type of the member.</typeparam>
-        /// <param name="builder">The builder.</param>
-        /// <param name="member">The member.</param>
-        public static ITypeRuleMarker<T> PhoneNumber<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member)
-        {
-            Utility.Track<T>(() =>
-            {
-                var expMember = ExpressionMemberFactory.Create(member);
-                builder.RegularExp(expMember, nameof(PhoneNumber), RuleExtensions.PHONE_PATTERN);
-            }, nameof(PhoneNumber));
             return builder;
         }
 
@@ -141,7 +125,7 @@ namespace DynamicVNET.Lib
         /// <param name="member">The member.</param>
         public static ITypeRuleMarker<T> Url<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.RegularExp(expMember, nameof(Url), RuleExtensions.URL_PATTERN);
@@ -158,7 +142,7 @@ namespace DynamicVNET.Lib
         /// <param name="member">The member.</param>
         public static ITypeRuleMarker<T> Required<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.Required(expMember);
@@ -176,7 +160,7 @@ namespace DynamicVNET.Lib
         /// <param name="length">The length.</param>
         public static ITypeRuleMarker<T> MaxLen<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, int length = 0)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.MaxLen(expMember, length);
@@ -194,7 +178,7 @@ namespace DynamicVNET.Lib
         /// <param name="pattern">The pattern.</param>
         public static ITypeRuleMarker<T> RegularExp<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, string pattern)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.RegularExp(expMember, nameof(RegularExp), pattern);
@@ -213,7 +197,7 @@ namespace DynamicVNET.Lib
         /// <param name="max">The maximum.</param>
         public static ITypeRuleMarker<T> Range<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, double min, double max)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.Range(expMember, min, max);
@@ -232,7 +216,7 @@ namespace DynamicVNET.Lib
         /// <param name="max">The maximum.</param>
         public static ITypeRuleMarker<T> Range<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, int min, int max)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.Range(expMember, min, max);
@@ -252,7 +236,7 @@ namespace DynamicVNET.Lib
         /// <param name="max">The maximum.</param>
         public static ITypeRuleMarker<T> Range<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, Type type, string min, string max)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.Range(expMember, type, min, max);
@@ -269,7 +253,7 @@ namespace DynamicVNET.Lib
         /// <param name="setup">The setup.</param>
         public static ITypeRuleMarker<T> Branch<T>(this ITypeRuleMarker<T> builder, Func<T, bool> condition, Action<ITypeRuleMarker<T>> setup)
         {
-            Utility.Track<T>(() =>
+            Utility.TrackTrace<T>(() =>
             {
                 if (setup == null)
                 {

@@ -7,14 +7,8 @@ namespace DynamicVNET.Lib.Core
     /// </summary>
     public class ValidatorContext
     {
-        /// <summary>
-        /// 
-        /// </summary>
         public Applier Applier { get; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public Type TaggedType { get; }
 
         /// <summary>

@@ -9,7 +9,6 @@ namespace DynamicVNET.Lib
     {
         // For regular expressions.
         public const string URL_PATTERN = @"(mailto\:|(news|(ht|f)tp(s?))\://)(([^[:space:]]+)|([^[:space:]]+)( #([^#]+)#)?)";
-        public const string PHONE_PATTERN = @"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$";
         public const string EMAIL_PATTERN = @"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$";
 
         // For errors.
@@ -31,11 +30,8 @@ namespace DynamicVNET.Lib
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
 
+                return false;
             }, errorMessage, context), context));
             return builder;
         }
@@ -54,17 +50,22 @@ namespace DynamicVNET.Lib
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+
+                return false;
             }, errorMessage, context), context));
             return builder;
         }
 
-        public static IRuleMarker StringLen(this IRuleMarker builder, IMember member, int max)
+        public static IRuleMarker StringLen(this IRuleMarker builder, IMember member, int max, int? min = null)
         {
-            builder.Add(new AnnotationRuleAdapter(new StringLengthAttribute(max),
+            StringLengthAttribute strLenAnnotation = new StringLengthAttribute(max);
+
+            if (min != null)
+            {
+                strLenAnnotation.MinimumLength = min.Value;
+            }
+
+            builder.Add(new AnnotationRuleAdapter(strLenAnnotation,
                                                             new RuleContext(nameof(StringLen), member)));
             return builder;
         }
@@ -114,11 +115,6 @@ namespace DynamicVNET.Lib
         public static IRuleMarker EmailAddress(this IRuleMarker builder, IMember member)
         {
             return builder.RegularExp(member, nameof(EmailAddress) ,EMAIL_PATTERN);
-        }
-
-        public static IRuleMarker PhoneNumber(this IRuleMarker builder, IMember member)
-        {
-            return builder.RegularExp(member, nameof(PhoneNumber), PHONE_PATTERN);
         }
 
         public static IRuleMarker Url(this IRuleMarker builder, IMember member)

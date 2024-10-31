@@ -5,10 +5,10 @@
     <PackageId>DynamicVNET</PackageId>
     <Version>1.4.0</Version>
     <VersionPrefix>1.4.0</VersionPrefix>
-    <Authors>Rasul Huseynov</Authors>
+    <Author>Rasul Huseynov</Author>
     <Description>
-      DynamicVNET is .NET Standard library that was created help to develop reuse dynamic validation. It helps to build some rules on POCO and own blackbox libs. It has rich conveniences and features as a Fluent API in runtime, wrapped over DataAnnotation attributes and supports a cross-platform environment.
-    </Description>
+		DynamicVNET is a .NET Standard library that was created to develop dynamic reuse validation. The main idea of the library is to apply validation rules using a declarative approach. And the rules can be used on POCO and BlackBox libraries. Also, it has rich facilities and features as Fluent API at runtime.
+	</Description>
     <Company>DynamicVNET.Lib</Company>
     <Copyright>Copyright (c) 2018-2024 Rasul Huseynov</Copyright>
     <PackageLicenseUrl>https://github.com/rasulhsn/DynamicVNET/blob/master/LICENSE</PackageLicenseUrl>
