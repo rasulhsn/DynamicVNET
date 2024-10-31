@@ -20,7 +20,9 @@ namespace DynamicVNET.Lib.Internal
         /// or
         /// expression
         /// </exception>
-        internal ExpressionMember(LambdaExpression expression, Type parent, Type member)
+        internal ExpressionMember(LambdaExpression expression,
+                                    Type parent,
+                                    Type member)
         {
             this._parentType = parent;
             this.Type = member ?? throw new ArgumentNullException(nameof(member));
@@ -29,59 +31,37 @@ namespace DynamicVNET.Lib.Internal
             this.Initialize();
         }
 
-        /// <summary>
-        /// Gets a value indicating whether this instance is nullable.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is nullable; otherwise, <c>false</c>.
-        /// </value>
+        ///<inheritdoc cref="IMember.IsNullable"/>
         public bool IsNullable
         {
             get
             {
-                if (Type == typeof(string))
+                if (Type == typeof(string) || Type.IsClass)
+                {
                     return true;
-                else if (Type.IsClass)
-                    return true;
-                else
-                    return Nullable.GetUnderlyingType(Type) != null;
+                }
+
+                return Nullable.GetUnderlyingType(Type) != null;
             }
         }
-        /// <summary>
-        /// Gets the end name of the point.
-        /// </summary>
-        /// <value>
-        /// The end name of the point.
-        /// </value>
-        public string EndPointName { get; private set; }
 
-        /// <summary>
-        /// Gets the type.
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
+        ///<inheritdoc cref="IMember.Name"/>
+        public string Name { get; private set; }
+
+        ///<inheritdoc cref="IMember.Type"/>
         public Type Type { get; }
 
-        /// <summary>
-        /// Gets a value indicating whether this instance is field or property.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is field or property; otherwise, <c>false</c>.
-        /// </value>
+        ///<inheritdoc cref="IMember.IsFieldOrProperty"/>
         public bool IsFieldOrProperty { get; private set; }
 
-        /// <summary>
-        /// Resolves the member value.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
+        ///<inheritdoc cref="IMember.ResolveValue"/>
         public object ResolveValue(object instance)
         {
             try
             {
                 return _memberExpression
-                    .Compile()
-                    .DynamicInvoke(instance);
+                        .Compile()
+                        .DynamicInvoke(instance);
             }
             catch
             {
@@ -99,16 +79,16 @@ namespace DynamicVNET.Lib.Internal
                 }
             }
 
-            this.EndPointName = string.IsNullOrEmpty(this.EndPointName) ? "" : this.EndPointName;
+            this.Name = string.IsNullOrEmpty(this.Name) ? "" : this.Name;
         }
 
         private bool TrySetDesriptorInfo(LambdaExpression memberExpression)
         {
-            if (IsMember(memberExpression.Body, out MemberExpression operand))
+            if (IsPropertyOrField(memberExpression.Body, out MemberExpression operand))
             {
                 if (operand.NodeType != ExpressionType.Parameter)
                 {
-                    this.EndPointName = operand.Member.Name;
+                    this.Name = operand.Member.Name;
                     this.IsFieldOrProperty = true;
                     return true;
                 }
@@ -117,7 +97,7 @@ namespace DynamicVNET.Lib.Internal
             {
                 if (callOperand.NodeType != ExpressionType.Parameter)
                 {
-                    this.EndPointName = callOperand.Method.Name;
+                    this.Name = callOperand.Method.Name;
                     this.IsFieldOrProperty = false;
                     return true;
                 }
@@ -138,7 +118,7 @@ namespace DynamicVNET.Lib.Internal
             return false;
         }
 
-        private bool IsMember(Expression toUp, out MemberExpression memberExpression)
+        private bool IsPropertyOrField(Expression toUp, out MemberExpression memberExpression)
         {
             if (toUp is UnaryExpression upOperand)
             {
@@ -158,14 +138,13 @@ namespace DynamicVNET.Lib.Internal
 
         private bool IsDefinedAs(Defination defination)
         {
-            if (_parentType == typeof(string) && defination == Defination.String)
+            if ((_parentType == typeof(string) && defination == Defination.String)
+                        || (_parentType.IsPrimitive && defination == Defination.Primitive)
+                        || (_parentType.IsValueType && defination == Defination.Struct)
+                        || (_parentType.IsClass && defination == Defination.Class))
+            {
                 return true;
-            else if (_parentType.IsPrimitive && defination == Defination.Primitive)
-                return true;
-            else if (_parentType.IsValueType && defination == Defination.Struct)
-                return true;
-            else if (_parentType.IsClass && defination == Defination.Class)
-                return true;
+            }
 
             return false;
         }

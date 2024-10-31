@@ -17,19 +17,18 @@ namespace DynamicVNET.Lib.Unit.Tests
         /// </summary>
         public ExpressionMemberTests()
         {
-            _instance = new UserStub()
+            _instance = new UserStub
             {
                 Age = 30,
-                Token = new TokenStub()
+                Token = new TokenStub
                 {
-                    InnerToken = new TokenStub()
+                    InnerToken = new TokenStub
                     {
                         TokenNumber = "11111"
                     }
                 },
             };
         }
-
 
         [Fact]
         public void Initialize_GivenNestedProperty_ReturnPropertyNameByModel()
@@ -42,19 +41,19 @@ namespace DynamicVNET.Lib.Unit.Tests
             ExpressionMember vMember = new ExpressionMember(lambda, typeof(UserStub), typeof(string));
 
             // Assert
-            Assert.Equal(expected, vMember.EndPointName);
+            Assert.Equal(expected, vMember.Name);
         }
 
         [Fact]
-        public void ResolveValue_GivenModelPropertyLambdaExpressionMethod_ReturnsSameWithModelAge()
+        public void ResolveValue_GivenModelPropertyLambdaExpressionMethod_ReturnSameWithModelAge()
         {
             // Act
             const int expectedAge = 30;
             Expression<Func<UserStub, int>> lambda = (model) => model.GetAge();
-            ExpressionMember vMember = new ExpressionMember(lambda, typeof(UserStub), typeof(string));
+            ExpressionMember vMember = new ExpressionMember(lambda, typeof(UserStub), typeof(int));
 
             // Arrange
-            int actualAge = int.Parse(vMember.ResolveValue(_instance).ToString());
+            object actualAge = vMember.ResolveValue(_instance);
 
             // Assert
             Assert.Equal(expectedAge, actualAge);

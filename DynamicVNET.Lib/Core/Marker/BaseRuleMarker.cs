@@ -3,19 +3,11 @@ using System.Collections.Generic;
 
 namespace DynamicVNET.Lib
 {
-    /// <summary>
-    ///
-    /// </summary>
-    public abstract class BaseRuleMarker
+    public abstract class BaseRuleMarker : IRuleMarker
     {
         private ICollection<IValidationRule> _rules;
 
-        /// <summary>
-        /// Gets the rules.
-        /// </summary>
-        /// <value>
-        /// The rules.
-        /// </value>
+        /// <inheritdoc/>
         public IEnumerable<IValidationRule> Rules => this._rules;
 
         /// <summary>
@@ -26,41 +18,38 @@ namespace DynamicVNET.Lib
             this._rules = new RuleCollection();
         }
 
-        /// <summary>
-        /// Adds the specified rule.
-        /// </summary>
-        /// <param name="rule">The rule.</param>
-        public virtual void Add(IValidationRule rule)
+        /// <inheritdoc/>
+        public void Add(IValidationRule rule)
         {
+            if (rule == null)
+            {
+                throw new System.ArgumentNullException(nameof(rule));
+            }
+
             this._rules.Add(rule);
         }
 
-        /// <summary>
-        /// Adds the specified rules.
-        /// </summary>
-        /// <param name="rules">The rules.</param>
-        public virtual void Add(IEnumerable<IValidationRule> rules)
+        /// <inheritdoc/>
+        public void Add(IEnumerable<IValidationRule> rules)
         {
+            if (rules == null)
+            {
+                throw new System.ArgumentNullException(nameof(rules));
+            }
+
             foreach (var item in rules)
+            {
                 this.Add(item);
+            }
         }
 
         /// <summary>
-        /// Sets the specified rules.
+        /// Set the specified rules.
         /// </summary>
         /// <param name="rules">The rules.</param>
         protected void Set(IEnumerable<IValidationRule> rules)
         {
             _rules = new RuleCollection(rules);
-        }
-
-        /// <summary>
-        /// Copies the specified marker.
-        /// </summary>
-        /// <param name="marker">The marker.</param>
-        protected void Copy(BaseRuleMarker marker)
-        {
-            this._rules = marker._rules;
         }
     }
 }

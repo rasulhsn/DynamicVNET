@@ -12,7 +12,7 @@ namespace DynamicVNET.Lib.Unit.Tests
     public class RuleMarkerTests
     {
         [Fact]
-        public void Null_GivenInvalidTypeMember_ThrowValidationMarkerException()
+        public void Null_WhenGivenInvalidTypeMember_ShouldThrowValidationMarkerException()
         {
             // Act
             UserStub model = new UserStub()
@@ -23,7 +23,7 @@ namespace DynamicVNET.Lib.Unit.Tests
             };
             RuleMarker<UserStub> builder = new RuleMarker<UserStub>();
             Expression<Func<UserStub, int>> lambda = x => x.Age;
-            IMember ageMember = new ExpressionMember(lambda, typeof(UserStub), typeof(int));// must be mock
+            IMember ageMember = new ExpressionMember(lambda, typeof(UserStub), typeof(int)); // must be mock
 
             // Arrange
             // Assert

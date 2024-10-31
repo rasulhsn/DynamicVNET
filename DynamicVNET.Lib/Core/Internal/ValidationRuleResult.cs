@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DynamicVNET.Lib.Exceptions;
 
-namespace DynamicVNET.Lib.Internal
+namespace DynamicVNET.Lib
 {
     /// <summary>
     /// Defines a validation result
@@ -85,6 +85,14 @@ namespace DynamicVNET.Lib.Internal
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public ValidationRuleResult Copy()
+        {
+            return new ValidationRuleResult(this.IsValid, this.MemberName, this.ValidationName, this.ErrorInfo, this.NestedResults);
+        }
+
+        /// <summary>
         /// Successes the specified member name.
         /// </summary>
         /// <param name="memberName">Name of the member.</param>
@@ -128,7 +136,7 @@ namespace DynamicVNET.Lib.Internal
         /// <param name="errorInfo">The error information.</param>
         /// <param name="results">The results.</param>
         /// <returns></returns>
-        public static ValidationRuleResult Failure(string memberName, string validationName,ValidationException errorInfo, IEnumerable<ValidationRuleResult> results)
+        public static ValidationRuleResult Failure(string memberName, string validationName, ValidationException errorInfo, IEnumerable<ValidationRuleResult> results)
         {
             return new ValidationRuleResult(false, memberName, validationName, errorInfo, results);
         }
