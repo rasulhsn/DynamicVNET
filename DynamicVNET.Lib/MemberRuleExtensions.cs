@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DynamicVNET.Lib.Core;
+using System;
 
 namespace DynamicVNET.Lib
 {
@@ -30,7 +31,8 @@ namespace DynamicVNET.Lib
         /// Marker String length.
         /// </summary>
         /// <param name="builder">The builder.</param>
-        /// <param name="max">The maximum.</param>
+        /// <param name="max">The maximum len.</param>
+        /// <param name="min">The minimum len.</param>
         public static IMemberRuleMarker StringLen(this IMemberRuleMarker builder, int max, int? min = null)
         {
             builder.StringLen(builder.Selected, max, min);
@@ -130,6 +132,136 @@ namespace DynamicVNET.Lib
         public static IMemberRuleMarker Url(this IMemberRuleMarker builder)
         {
             builder.Url(builder.Selected);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker GreaterThan(this IMemberRuleMarker builder, int minValue , string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+            builder.GreaterThan(builder.Selected, minValue, errorMessage);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker LessThan(this IMemberRuleMarker builder, int maxValue, string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+            builder.LessThan(builder.Selected, maxValue, errorMessage);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker GreaterThan(this IMemberRuleMarker builder, double minValue, string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+            builder.GreaterThan(builder.Selected, minValue, errorMessage);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker LessThan(this IMemberRuleMarker builder, double maxValue, string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+            builder.LessThan(builder.Selected, maxValue, errorMessage);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker GreaterThan(this IMemberRuleMarker builder, decimal minValue, string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+            builder.GreaterThan(builder.Selected, minValue, errorMessage);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker LessThan(this IMemberRuleMarker builder, decimal maxValue, string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+            builder.LessThan(builder.Selected, maxValue, errorMessage);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker GreaterThan(this IMemberRuleMarker builder, float minValue, string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+            builder.GreaterThan(builder.Selected, minValue, errorMessage);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker LessThan(this IMemberRuleMarker builder, float maxValue, string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+            builder.LessThan(builder.Selected, maxValue, errorMessage);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker GreaterThan(this IMemberRuleMarker builder, byte minValue, string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+            builder.GreaterThan(builder.Selected, minValue, errorMessage);
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static IMemberRuleMarker LessThan(this IMemberRuleMarker builder, byte maxValue, string errorMessage = null)
+        {
+            errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+            builder.LessThan(builder.Selected, maxValue, errorMessage);
             return builder;
         }
     }

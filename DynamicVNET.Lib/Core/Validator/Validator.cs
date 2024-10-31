@@ -12,6 +12,8 @@ namespace DynamicVNET.Lib
 
         protected readonly ValidatorContext Context;
 
+        public Type ValidateType => this.Context.TaggedType;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Validator"/> class.
         /// </summary>
@@ -49,7 +51,7 @@ namespace DynamicVNET.Lib
         /// Initializes a new instance of the <see cref="Validator{T}"/> class.
         /// </summary>
         public Validator(IEnumerable<IValidation> validationRules,
-                                            ValidatorContext context) : base(validationRules, context) { }
+                          ValidatorContext context) : base(validationRules, context) { }
 
         /// <inheritdoc/>
         public bool IsValid(T instance)

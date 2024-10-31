@@ -17,18 +17,23 @@ namespace DynamicVNET.Lib.Internal
         ///<inheritdoc cref="IMember.Name"/>
         public string Name { get; }
 
+        ///<inheritdoc cref="IMember.TypeDefinedAs"/>
+        public Defination TypeDefinedAs { get; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EmptyMember"/> class.
         /// </summary>
         public EmptyMember(string name,
                             Type type,
                             bool isNullable = true,
-                            bool isFieldOrProperty = false)
+                            bool isFieldOrProperty = false,
+                            Defination typeDefinedAs = Defination.Primitive)
         {
             this.Name = name;
             this.Type = type;
             this.IsNullable = isNullable;
             this.IsFieldOrProperty = isFieldOrProperty;
+            this.TypeDefinedAs = typeDefinedAs;
         }
 
         /// <exception cref="NotImplementedException"></exception>

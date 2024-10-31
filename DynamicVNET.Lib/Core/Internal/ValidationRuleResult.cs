@@ -112,7 +112,7 @@ namespace DynamicVNET.Lib
         /// <returns></returns>
         public static ValidationRuleResult Failure(string memberName, string validationName, string errorMessage)
         {
-            return new ValidationRuleResult(false, memberName, validationName, new ValidationException(validationName,errorMessage), null);
+            return new ValidationRuleResult(false, memberName, validationName, new ValidationException(validationName, errorMessage, null), null);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace DynamicVNET.Lib
         /// <returns></returns>
         public static ValidationRuleResult Failure(string memberName, string validationName, string errorMessage, IEnumerable<ValidationRuleResult> results)
         {
-            return new ValidationRuleResult(false, memberName, validationName, new ValidationException(validationName, errorMessage), results);
+            return new ValidationRuleResult(false, memberName, validationName, new ValidationException(validationName, errorMessage, null), results);
         }
 
         /// <summary>

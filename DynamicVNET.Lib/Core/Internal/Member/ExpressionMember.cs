@@ -54,6 +54,9 @@ namespace DynamicVNET.Lib.Internal
         ///<inheritdoc cref="IMember.IsFieldOrProperty"/>
         public bool IsFieldOrProperty { get; private set; }
 
+        ///<inheritdoc cref="IMember.TypeDefinedAs"/>
+        public Defination TypeDefinedAs { get; private set; }
+
         ///<inheritdoc cref="IMember.ResolveValue"/>
         public object ResolveValue(object instance)
         {
@@ -73,6 +76,8 @@ namespace DynamicVNET.Lib.Internal
         {
             if (this._memberExpression.Body.NodeType != ExpressionType.Parameter)
             {
+                this.TypeDefinedAs = GetDefinedAs(this.Type);
+
                 if (IsDefinedAs(Defination.Class) || IsDefinedAs(Defination.Struct))
                 {
                     TrySetDesriptorInfo(this._memberExpression);
@@ -149,9 +154,28 @@ namespace DynamicVNET.Lib.Internal
             return false;
         }
 
-        enum Defination : byte
+        private Defination GetDefinedAs(Type memberType)
         {
-            Class = 1, Struct = 2, String = 3, Primitive = 4, Other = 5
+            if (memberType == typeof(string))
+                return Defination.String;
+            else if (memberType == typeof(double))
+                return Defination.Double;
+            else if (memberType == typeof(decimal))
+                return Defination.Decimal;
+            else if (memberType == typeof(float))
+                return Defination.Float;
+            else if (memberType == typeof(int))
+                return Defination.Int;
+            else if (memberType == typeof(byte))
+                return Defination.Byte;
+            else if (memberType.IsPrimitive)
+                return Defination.Primitive;
+            else if (memberType.IsValueType)
+                return Defination.Struct;
+            else if (memberType.IsClass)
+                return Defination.Class;
+            else
+                return Defination.Uknown;
         }
     }
 }

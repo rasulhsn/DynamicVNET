@@ -22,7 +22,7 @@ namespace DynamicVNET.Lib.Helper
             catch (Exception exp)
             {
                 Trace.WriteLine($"{exp.Message} || {exp.StackTrace} || {exp.InnerException?.Message}");
-                throw exp;
+                throw;
             }
         }
 
@@ -43,7 +43,7 @@ namespace DynamicVNET.Lib.Helper
             catch (Exception exp)
             {
                 Trace.WriteLine($"{exp.Message} || {exp.StackTrace} || {exp.InnerException?.Message}");
-                throw exp;
+                throw;
             }
         }
     }

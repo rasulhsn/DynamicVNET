@@ -2,6 +2,21 @@
 
 namespace DynamicVNET.Lib.Internal
 {
+    public enum Defination : byte
+    {
+        Class = 1,
+        Struct = 2,
+        String = 3,
+        Primitive = 4,
+        Other = 5,
+        Decimal = 6,
+        Double = 7,
+        Float = 8,
+        Int = 9,
+        Byte = 10,
+        Uknown = 11,
+    }
+
     public interface IMember
     {
         /// <summary>
@@ -23,6 +38,11 @@ namespace DynamicVNET.Lib.Internal
         /// Gets the end of the name for example name of marked property or field.
         /// </summary>
         string Name { get; }
+
+        /// <summary>
+        /// Gets a definition of the type.
+        /// </summary>
+        Defination TypeDefinedAs { get; }
 
         /// <summary>
         /// Resolves the member value.

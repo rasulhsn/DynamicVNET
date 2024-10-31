@@ -9,6 +9,7 @@ namespace DynamicVNET.Lib.Integration.Tests
         public void IsValid_WhenGivenInvalidObject_ReturnsFalse()
         {
             // Act
+            UserStub userInstance = new UserStub();
             var validator = ValidatorFactory.Create<UserStub>(builder =>
             {
                 builder
@@ -17,7 +18,28 @@ namespace DynamicVNET.Lib.Integration.Tests
             });
 
             // Arrange
-            bool isValid = validator.IsValid(new UserStub());
+            bool isValid = validator.IsValid(userInstance);
+
+            // Assert
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void test()
+        {
+            // Act
+            UserStub userInstance = new UserStub()
+            {
+                Age = 0
+            };
+            var validator = ValidatorFactory.Create<UserStub>(builder =>
+            {
+                var aa = builder;
+                builder.GreaterThan(x => x.Age, 20);
+            });
+
+            // Arrange
+            bool isValid = validator.IsValid(userInstance);
 
             // Assert
             Assert.False(isValid);

@@ -1,5 +1,6 @@
 ﻿using DynamicVNET.Lib.Helper;
 using DynamicVNET.Lib.Internal;
+using DynamicVNET.Lib.Core;
 using System;
 using System.Linq.Expressions;
 
@@ -88,7 +89,8 @@ namespace DynamicVNET.Lib
         /// <typeparam name="TMember">The type of the member.</typeparam>
         /// <param name="builder">The builder.</param>
         /// <param name="member">The member.</param>
-        /// <param name="max">The maximum.</param>
+        /// <param name="max">The maximum len.</param>
+        /// <param name="min">The minimum len.</param>
         public static ITypeRuleMarker<T> StringLen<T, TMember>(this ITypeRuleMarker<T> builder, Expression<Func<T, TMember>> member, int max, int? min = null)
         {
             Utility.TrackTrace<T>(() =>
@@ -224,6 +226,7 @@ namespace DynamicVNET.Lib
             return builder;
         }
 
+
         /// <summary>
         /// Marker Range.
         /// </summary>
@@ -269,6 +272,197 @@ namespace DynamicVNET.Lib
                                                 new EmptyMember(condition.ToString(),
                                                 typeof(T)))));
             }, nameof(Branch));
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> GreaterThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, int>> member, int minValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.GreaterThan(expMember, minValue, errorMessage);
+            }, nameof(Range));
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> LessThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, int>> member, int maxValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.LessThan(expMember, maxValue, errorMessage);
+            }, nameof(Range));
+            return builder;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> GreaterThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, double>> member, double minValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.GreaterThan(expMember, minValue, errorMessage);
+            }, nameof(Range));
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> LessThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, double>> member, double maxValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.LessThan(expMember, maxValue, errorMessage);
+            }, nameof(Range));
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> GreaterThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, decimal>> member, decimal minValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.GreaterThan(expMember, minValue, errorMessage);
+            }, nameof(Range));
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> LessThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, decimal>> member, decimal maxValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.LessThan(expMember, maxValue, errorMessage);
+            }, nameof(Range));
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> GreaterThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, float>> member, float minValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.GreaterThan(expMember, minValue, errorMessage);
+            }, nameof(Range));
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> LessThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, float>> member, float maxValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.LessThan(expMember, maxValue, errorMessage);
+            }, nameof(Range));
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> GreaterThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, byte>> member, byte minValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.GreaterThan(expMember, minValue, errorMessage);
+            }, nameof(Range));
+            return builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="member"></param>
+        /// <param name="minValue"></param>
+        /// <param name="errorMessage"></param>
+        public static ITypeRuleMarker<T> LessThan<T>(this ITypeRuleMarker<T> builder, Expression<Func<T, byte>> member, byte maxValue, string errorMessage = null)
+        {
+            Utility.TrackTrace<T>(() =>
+            {
+                errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
+                var expMember = ExpressionMemberFactory.Create(member);
+                builder.LessThan(expMember, maxValue, errorMessage);
+            }, nameof(Range));
             return builder;
         }
     }

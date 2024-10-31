@@ -1,6 +1,7 @@
 ﻿using DynamicVNET.Lib.Exceptions;
 using Xunit;
 using DynamicVNET.Lib.Internal;
+using DynamicVNET.Lib.Core;
 using System.Linq.Expressions;
 using System;
 using System.Linq;

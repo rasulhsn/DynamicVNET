@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DynamicVNET.Lib
 {
@@ -7,6 +8,11 @@ namespace DynamicVNET.Lib
     /// </summary>
     public interface IValidator
     {
+        /// <summary>
+        /// The type of the validated by Validator
+        /// </summary>
+        Type ValidateType { get; }
+
         /// <summary>
         /// Returns true if ... is valid.
         /// </summary>

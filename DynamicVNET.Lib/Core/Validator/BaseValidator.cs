@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DynamicVNET.Lib
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public abstract class BaseValidator<T> : IValidator<T>
     {
         private readonly IValidator<T> _validator;
+
+        public Type ValidateType => typeof(T);
 
         /// <summary>
         /// Allows you to abort a validation, if at least one validation fails.
