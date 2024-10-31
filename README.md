@@ -70,8 +70,7 @@ IEnumerable<ValidationMarkerResult> results = validator.Validate(emp);
 #### Branch Example
 ```csharp
  var validator = ValidatorFactory.Create<Model>(builder => {
-    builder.Marker
-            .Required(x => x.Token.TokenNumber)
+    builder.Required(x => x.Token.TokenNumber)
             .Branch(x => x.Name.Contains("resul"), x =>
              {
                  x.Required(y => y.Email)
