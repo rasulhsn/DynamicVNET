@@ -6,8 +6,7 @@
     <Version>1.4.0</Version>
     <VersionPrefix>1.4.0</VersionPrefix>
     <Author>Rasul Huseynov</Author>
-    <Description>
-		DynamicVNET is a .NET Standard library that was created to develop dynamic reuse validation. The main idea of the library is to apply validation rules using a declarative approach. And the rules can be used on POCO and BlackBox libraries. Also, it has rich facilities and features as Fluent API at runtime.
+    <Description>DynamicVNET is a .NET Standard library that was created to develop dynamic reuse validation. The main idea of the library is to apply validation rules using a declarative approach. And the rules can be used on POCO and BlackBox libraries. Also, it has rich facilities and features as Fluent API at runtime.
 	</Description>
     <Company>DynamicVNET.Lib</Company>
     <Copyright>Copyright (c) 2018-2024 Rasul Huseynov</Copyright>
@@ -15,12 +14,21 @@
     <PackageProjectUrl>https://github.com/rasulhsn/DynamicVNET</PackageProjectUrl>
     <RepositoryUrl>https://github.com/rasulhsn/DynamicVNET</RepositoryUrl>
     <PackageTags>POCOValidation DataAnnotation Validator BindingDynamicValidation DynamicValidator FluentValidation</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageIcon>DynamicVNET Icon.png</PackageIcon>
+	<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\resul\OneDrive\Рабочий стол\DynamicVNET Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0">
