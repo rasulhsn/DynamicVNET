@@ -27,7 +27,7 @@ DynamicVNET is .NET Standard library that was created help to develop reuse dyna
    - Range
    - Null (Only reference type)
    - NotNull (Only reference type)
-   - GreatherThan
+   - GreaterThan
    - LessThan
 
 ### Example
