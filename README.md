@@ -19,7 +19,6 @@ DynamicVNET is a .NET Standard library that was created to develop dynamic reuse
    - Predicate (Custom)
    - StringLen
    - EmailAddress
-   - PhoneNumber
    - Url (for GET)
    - Required
    - MaxLen
