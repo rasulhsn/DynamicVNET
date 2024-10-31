@@ -139,6 +139,6 @@ Install [DynamicVNET](https://www.nuget.org/packages/DynamicVNET/) from the pack
 PM> Install-Package DynamicVNET -Version 1.4.0-beta
 ```
 
-### License & Copyright
+### Copyright
 
 [DynamicVNET](https://github.com/rasulhsn/DynamicVNET) is Copyright © 2018 Rasul Huseynov.
