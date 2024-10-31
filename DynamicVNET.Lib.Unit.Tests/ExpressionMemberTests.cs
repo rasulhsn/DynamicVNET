@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using DynamicVNET.Lib.Integration.Tests.Stub;
 using DynamicVNET.Lib.Internal;
 using Xunit;
 
-namespace DynamicVNET.Lib.Integration.Tests
+namespace DynamicVNET.Lib.Unit.Tests
 {
     /// <summary>
     /// <see cref="ExpressionMember"/>
