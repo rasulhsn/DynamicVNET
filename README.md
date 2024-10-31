@@ -1,5 +1,5 @@
 ## DynamicVNET - Overview
-[![NuGet](https://img.shields.io/badge/nuget-1.4.0.beta-blue.svg)](https://www.nuget.org/packages/DynamicVNET/1.4.0-beta)
+[![NuGet](https://img.shields.io/badge/nuget-1.4.0-blue.svg)](https://www.nuget.org/packages/DynamicVNET/1.4.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/rasulhsn/DynamicVNET/blob/master/LICENSE)
 
 DynamicVNET is .NET Standard library that was created help to develop reuse dynamic validation. It helps to build some rules on POCO and own blackbox libs. It has rich conveniences and features as a <strong>Fluent API</strong> in runtime, wrapped over <strong>DataAnnotation</strong> attributes and supports a cross-platform environment.
@@ -53,8 +53,7 @@ Employee emp = new Employee()
 };
 
 var validator = ValidatorFactory.Create<Employee>(builder => {
-                    builder.Marker
-                            .StringLen(x => x.Name, 4)
+                    builder.StringLen(x => x.Name, 4)
                             .EmailAddress(x => x.Email)
                             .Predicate(x => x.Email.Contains("@simple.com"))
                             .Required(x => x.TokenNumber.Number) //  nested member
@@ -96,21 +95,17 @@ public class EmployeeValidator : BaseValidator<Employee>
 {
       protected override void Setup(ValidatorBuilder<Employee> builder)
       {
-           builder.Marker
-                     .For(x => x.Name)
-                     .Required();
+           builder.For(x => x.Name)
+                  .Required();
 
-           builder.Marker
-                   .Branch(x => x.Name.Contains("jhon"), x =>
+           builder.Branch(x => x.Name.Contains("jhon"), x =>
                    {
                       x.MaxLen(m => m.TokenNumber.Number, 15);
-                   })
-                    .For(x => x.Email)
+                   }).For(x => x.Email)
                     .Required()
                     .EmailAddress();
 
-           builder.Marker
-                   .Required(x => x.TokenNumber.Number);
+           builder.Required(x => x.TokenNumber.Number);
       }
 }
  
