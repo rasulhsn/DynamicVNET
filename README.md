@@ -1,8 +1,8 @@
 ## DynamicVNET - Overview
 [![NuGet](https://img.shields.io/badge/nuget-1.4.0.beta-blue.svg)](https://www.nuget.org/packages/DynamicVNET/1.4.0-beta)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/rasulhsn/DynamicVNET/blob/master/LICENSE)
 
 DynamicVNET is a .NET Standard library that was created to develop dynamic reuse validation. The main idea of the library is to apply validation rules using a declarative approach. And the rules can be used on POCO and BlackBox libraries. Also, it has rich facilities and features as Fluent API at runtime.
-
 
 ### Support
  - Branching & Nested Branching [synonim logical tree].
@@ -141,4 +141,4 @@ PM> Install-Package DynamicVNET -Version 1.4.0-beta
 
 ### License & Copyright
 
-[DynamicVNET](https://github.com/rasulhsn/DynamicVNET) is Copyright © 2018-2021 Rasul Huseynov and lincensed under the [MIT license](https://github.com/rasulhsn/DynamicVNET/blob/master/LICENSE).
+[DynamicVNET](https://github.com/rasulhsn/DynamicVNET) is Copyright © 2018 Rasul Huseynov.
