@@ -25,7 +25,7 @@ namespace DynamicVNET.Lib.Integration.Tests
         }
 
         [Fact]
-        public void IsValid_WhenGivenInvalidObjectForGreatherThanMethod_ReturnsFalse()
+        public void IsValid_WhenGivenInvalidObjectForGreaterThanMethod_ReturnsFalse()
         {
             // Act
             UserStub userInstance = new UserStub()

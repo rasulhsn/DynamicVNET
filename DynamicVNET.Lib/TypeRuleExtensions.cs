@@ -290,7 +290,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.GreaterThan(expMember, minValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(GreaterThan));
             return builder;
         }
 
@@ -309,7 +309,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.LessThan(expMember, maxValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(LessThan));
             return builder;
         }
 
@@ -329,7 +329,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.GreaterThan(expMember, minValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(GreaterThan));
             return builder;
         }
 
@@ -348,7 +348,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.LessThan(expMember, maxValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(LessThan));
             return builder;
         }
 
@@ -367,7 +367,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.GreaterThan(expMember, minValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(GreaterThan));
             return builder;
         }
 
@@ -386,7 +386,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.LessThan(expMember, maxValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(LessThan));
             return builder;
         }
 
@@ -405,7 +405,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.GreaterThan(expMember, minValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(GreaterThan));
             return builder;
         }
 
@@ -424,7 +424,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.LessThan(expMember, maxValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(LessThan));
             return builder;
         }
 
@@ -443,7 +443,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should greather than {minValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.GreaterThan(expMember, minValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(GreaterThan));
             return builder;
         }
 
@@ -462,7 +462,7 @@ namespace DynamicVNET.Lib
                 errorMessage = errorMessage ?? $"Value of the instance should less than {maxValue}";
                 var expMember = ExpressionMemberFactory.Create(member);
                 builder.LessThan(expMember, maxValue, errorMessage);
-            }, nameof(Range));
+            }, nameof(LessThan));
             return builder;
         }
     }
