@@ -98,10 +98,11 @@ public class EmployeeValidator : BaseValidator<Employee>
            builder.For(x => x.Name)
                   .Required();
 
-           builder.Branch(x => x.Name.Contains("jhon"), x =>
+           builder.Branch(x => x.Name.Contains("Jhon"), x =>
                    {
                       x.MaxLen(m => m.TokenNumber.Number, 15);
-                   }).For(x => x.Email)
+                   })
+                   .For(x => x.Email)
                     .Required()
                     .EmailAddress();
 
@@ -111,11 +112,10 @@ public class EmployeeValidator : BaseValidator<Employee>
  
 Employee emp = new Employee()
 {
-    Name = "selman:okkes", 
-    TokenNumber = new Token() { Number = "adasd123123asd" }, 
+    Name = "Jhon Simon", 
+    TokenNumber = new Token() { Number = "ASD123123" }, 
     Email = "jhon.sim@jhona.com"
 };
- 
  
  var empValidator = new EmployeeValidator();
  bool result = empValidator.IsValid(emp);
