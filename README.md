@@ -2,35 +2,51 @@
 [![NuGet](https://img.shields.io/badge/nuget-1.4.1-blue.svg)](https://www.nuget.org/packages/DynamicVNET/1.4.1)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/rasulhsn/DynamicVNET/blob/master/LICENSE)
 
-DynamicVNET is .NET Standard library that was created help to develop reuse dynamic validation. It helps to build some rules on POCO and own blackbox libs. It has rich conveniences and features as a <strong>Fluent API</strong> in runtime, wrapped over <strong>DataAnnotation</strong> attributes and supports a cross-platform environment.
+DynamicVNET is a **.NET Standard library** designed to provide reusable, dynamic validation. It allows developers to build custom validation rules for **POCOs** (Plain Old CLR Objects) and integrate validation into private or third-party libraries seamlessly. With its **Fluent API** interface, wrapped over **DataAnnotation** attributes, DynamicVNET delivers a rich and flexible validation framework for cross-platform environments.  
 
-### Support
- - Branching & Nested Branching.
- - Nested Members.
- - Value Types & Single Primitive.
- - Reference Types (class).
- - Automatic ignoring of repeated validation.
- - Strongly Self Validator via Inheritance.
+## Key Features  
+- **Branching & Nested Branching**: Create complex validation rules with ease.  
+- **Nested Members**: Validate properties of nested objects.  
+- **Value Types & Single Primitives**: Validate scalar types such as integers and strings.  
+- **Reference Types**: Validate custom objects and classes.  
+- **Automatic Repeated Validation Ignoring**: Avoid redundant validation checks.  
+- **Strongly Self Validator**: Leverage inheritance for reusable and self-contained validators.  
 
-### Where is using ?
- - POCO Validation.
- - Dynamic validation for private libraries (third party libraries 'dll').
+## Use Cases  
+DynamicVNET is suitable for a variety of scenarios, including:  
+- **POCO Validation**: Define and enforce validation rules for simple objects.  
+- **Dynamic Validation for Libraries**: Validate objects in private or third-party libraries (e.g., `.dll` files).  
 
-### Validation methods
-   - Predicate (Custom)
-   - StringLen
-   - EmailAddress
-   - Url (for GET)
-   - Required
-   - MaxLen
-   - RegularExp
-   - Range
-   - Null (Only reference type)
-   - NotNull (Only reference type)
-   - GreaterThan
-   - LessThan
+## Validation Methods  
+DynamicVNET supports a wide range of validation methods:  
+- `Predicate` (Custom logic)  
+- `StringLen` (String length)  
+- `EmailAddress` (Email validation)  
+- `Url` (Validates URLs for GET requests)  
+- `Required` (Ensures non-null or non-empty values)  
+- `MaxLen` (Maximum string length)  
+- `RegularExp` (Regex-based validation)  
+- `Range` (Range validation)  
+- `Null` (Only for reference types)  
+- `NotNull` (Only for reference types)  
+- `GreaterThan` (Numeric comparison)  
+- `LessThan` (Numeric comparison)  
 
 ### Example
+
+```mermaid
+flowchart LR
+    A[POCO Object] --> B[ValidatorFactory]
+    B --> C[Fluent API Configuration]
+    C --> D[Validation Rules]
+    D -->|Required| E[Validator]
+    D -->|StringLen| E
+    D -->|Predicate| E
+    E --> F[Validation Results]
+    F -->|IsValid| G[Boolean Result]
+    F -->|Detailed Results| H[ValidationMarkerResult]
+```
+
 POCO Models.
 ```csharp
 public class Employee
