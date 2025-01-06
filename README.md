@@ -32,7 +32,7 @@ DynamicVNET supports a wide range of validation methods:
 - `GreaterThan` (Numeric comparison)  
 - `LessThan` (Numeric comparison)  
 
-### Example
+## Getting Started
 
 ```mermaid
 flowchart LR
@@ -47,7 +47,6 @@ flowchart LR
     F -->|Detailed Results| H[ValidationMarkerResult]
 ```
 
-POCO Models.
 ```csharp
 public class Employee
 {
@@ -61,7 +60,7 @@ public class Token
    public string Number { get; set; }
 }
 ```
-Validation.
+
 ```csharp
 Employee emp = new Employee()
 {
@@ -105,7 +104,7 @@ IEnumerable<ValidationMarkerResult> results = validator.Validate(emp);
  });
 ```
 
-## Example Strongly Self Validator
+## Example Strongly Validator
 
 ```csharp
 public class EmployeeValidator : BaseValidator<Employee>
