@@ -2,7 +2,7 @@
 [![NuGet](https://img.shields.io/badge/nuget-1.4.1-blue.svg)](https://www.nuget.org/packages/DynamicVNET/1.4.1)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/rasulhsn/DynamicVNET/blob/master/LICENSE)
 
-DynamicVNET is a **.NET Standard library** designed to provide reusable, dynamic validation. It allows developers to build custom validation rules for **POCOs** (Plain Old CLR Objects) and integrate validation into private or third-party libraries seamlessly. With its **Fluent API** interface, wrapped over **DataAnnotation** attributes, DynamicVNET delivers a rich and flexible validation framework for cross-platform environments.  
+DynamicVNET is a **.NET Standard library** designed to provide reusable, dynamic validation. It allows developers to build custom validation rules for **POCOs** (Plain Old CLR Objects) and integrate validation into private or third-party libraries seamlessly. With its **Fluent API** interface, wrapped over **DataAnnotation** attributes, DynamicVNET delivers a rich and flexible validation library for cross-platform environments.  
 
 ## Key Features  
 - **Branching & Nested Branching**: Create complex validation rules with ease.  
