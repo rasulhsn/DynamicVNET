@@ -104,7 +104,7 @@ IEnumerable<ValidationMarkerResult> results = validator.Validate(emp);
  });
 ```
 
-## Example Strongly Validator
+### Strongly Validator
 
 ```csharp
 public class EmployeeValidator : BaseValidator<Employee>
